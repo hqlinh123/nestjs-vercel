@@ -21,13 +21,18 @@ export class UsersService {
     orderBy?: Prisma.UserOrderByWithRelationInput;
   }): Promise<User[]> {
     const { skip, take, cursor, where, orderBy } = params;
-    return this.prisma.user.findMany({
+    const users = this.prisma.user.findMany({
       skip,
       take,
       cursor,
       where,
       orderBy,
     });
+
+    if(Array(users).length > 0){
+        return users
+    }
+    return []
   }
 
   async createUser(data: Prisma.UserCreateInput): Promise<User> {

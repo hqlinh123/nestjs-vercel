@@ -13,6 +13,7 @@ import { PostsService } from './post.service';
 import { PostModel } from '../generated/prisma/models/Post';
 import { UserModel } from '../generated/prisma/models/User';
 import { AppService } from './app.service';
+import { User } from '../generated/prisma/browser';
 
 @Controller()
 export class AppController {
@@ -21,9 +22,9 @@ export class AppController {
     private readonly postService: PostsService,
     private readonly appService: AppService,
   ) {}
-   @Get('/health')
-  async health(): Promise<string>{
-    return this.appService.getHello()
+   @Get('/users')
+  async users(): Promise<User[]>{
+    return this.userService.users({})
   }
   @Get('post/:id')
   async getPostById(@Param('id') id: string): Promise<PostModel> {
