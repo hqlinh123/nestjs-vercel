@@ -22,7 +22,7 @@ export class AppController {
     private readonly appService: AppService,
   ) {}
    @Get('/health')
-  async health(){
+  async health(): Promise<string>{
     return this.appService.getHello()
   }
   @Get('post/:id')
